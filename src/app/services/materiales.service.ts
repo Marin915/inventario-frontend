@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subject,Observable } from 'rxjs';
 import { environment } from '../../Environments/environment';
 import { MaterialEntrega } from '../casa/lotes/lotes.component';
+import { AuthService } from '../auth-service.service';
 
 
 export interface CrearCasaDTO {
@@ -123,7 +124,7 @@ export class MaterialesService {
   materialesUrl: any;
   private actualizacionInventarioSubject = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   listar(): Observable<Material[]> {
     return this.http.get<Material[]>(this.baseUrl);
@@ -262,5 +263,12 @@ devolverMaterialCasa(payload: {
     payload
   );
 }
+
+getPrivateData(): Observable<string> {
+    const headers = new HttpHeaders({
+      'Authorization': this.auth.getAuthHeader() || ''
+    });
+    return this.http.get<string>(`${this.baseUrl}/private/hello`, { headers });
+  }
 
 }

@@ -4,31 +4,25 @@ import { HomeComponent } from './Home/home/home.component';
 import { LotesComponent } from './casa/lotes/lotes.component';
 import { DuplexComponent } from './duplex/duplex/duplex.component';
 import { RentaComponent } from './renta/renta/renta.component';
-
+import { AuthGuardComponent } from './auth-guard/auth-guard.component';
+import { LoginService } from './login.service';
+import { InicioComponent } from './inicio/inicio.component';
+import { LoginComponent } from './login/login.component';
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+   { path: 'login', component: LoginComponent},
+  
+  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuardComponent] },
 
-  { path: 'home', component: HomeComponent },
+  // Aquí otras rutas protegidas
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardComponent] },
+  { path: 'home/casa', component: LotesComponent, data: { modeloId: 3, titulo: 'Lotes' }, canActivate: [AuthGuardComponent] },
+  { path: 'home/duplex', component: LotesComponent, data: { modeloId: 4, titulo: 'Dúplex' }, canActivate: [AuthGuardComponent] },
+  { path: 'home/renta', component: LotesComponent, data: { modeloId: 5, titulo: 'Renta' }, canActivate: [AuthGuardComponent] },
+  { path: 'home/materiales', component: MaterialesComponent, canActivate: [AuthGuardComponent] },
 
-  {
-    path: 'home/casa',
-    component: LotesComponent,
-    data: { modeloId: 3, titulo: 'Lotes' }
-  },
-  {
-    path: 'home/duplex',
-    component: LotesComponent,
-    data: { modeloId: 4, titulo: 'Dúplex' }
-  },
-  {
-    path: 'home/renta',
-    component: LotesComponent,
-    data: { modeloId: 5, titulo: 'Renta' }
-  },
-
-  { path: 'home/materiales', component: MaterialesComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '**', redirectTo: 'inicio' }
 
 /*  { path: '', redirectTo: 'home', pathMatch: 'full' }, // HOME por defecto
   { path: 'home', component: HomeComponent },
