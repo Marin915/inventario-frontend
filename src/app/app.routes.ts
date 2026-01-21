@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MaterialesComponent } from './pages/materiales/materiales.component';
 import { HomeComponent } from './Home/home/home.component';
 import { LotesComponent } from './casa/lotes/lotes.component';
@@ -8,6 +8,9 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 import { LoginService } from './login.service';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
+import { NgModule } from '@angular/core';
+
+
 export const routes: Routes = [
 
    { path: 'login', component: LoginComponent},
@@ -39,3 +42,9 @@ export const routes: Routes = [
   
 ];
 
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

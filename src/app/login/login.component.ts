@@ -3,12 +3,13 @@ import { AuthService } from '../auth-service.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, BrowserModule],
   styleUrl: './login.component.css',
    template: `
   <form (submit)="login()">
