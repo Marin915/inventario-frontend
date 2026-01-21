@@ -84,21 +84,18 @@
 /* ===============================
    ICONOS NAVBAR
 ================================ */
+
 .logo-home {
   width: 18px;
   height: 18px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   vertical-align: middle;
   object-fit: contain;
-
   /* Color blanco institucional */
   filter: brightness(0) invert(1);
   opacity: 1;
-
   /* Suavidad visual */
   transition: transform 0.2s ease, opacity 0.2s ease;
 }

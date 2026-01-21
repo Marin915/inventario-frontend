@@ -8,7 +8,7 @@ export class AuthService {
   private USER_KEY = 'user';
 
   login(username: string, password: string): boolean {
-    if(username === 'Canario' && password === 'admin0101') {
+    if(username === 'Conavi' && password === 'Grupo586') {
       const encoded = btoa(`${username}:${password}`);
       localStorage.setItem(this.USER_KEY, encoded);
       return true;

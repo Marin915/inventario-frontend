@@ -1,0 +1,50 @@
+.login-container {
+  /* Imagen de fondo, ocupa toda la pantalla */
+  background-image: url('../../assets/login.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* pantalla completa */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  background-color: rgba(255, 255, 255, 0.3); /* blanco con transparencia */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.login-form button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.error-msg {
+  color: red;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}

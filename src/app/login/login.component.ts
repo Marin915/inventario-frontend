@@ -1,24 +1,14 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth-service.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, BrowserModule],
-  styleUrl: './login.component.css',
-   template: `
-  <form (submit)="login()">
-    <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required />
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
-    <button type="submit">Entrar</button>
-    <p *ngIf="error" style="color:red;">Usuario o contraseña incorrectos</p>
-  </form>
-  `
+  imports: [FormsModule, CommonModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   username = '';
@@ -30,9 +20,15 @@ export class LoginComponent {
   login() {
     this.error = false;
     if (this.auth.login(this.username, this.password)) {
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/home']);  // Navega al home que mencionas
     } else {
       this.error = true;
     }
+  }
+retry() {
+    // Limpia el formulario y quita el error
+    this.username = '';
+    this.password = '';
+    this.error = false;
   }
 }

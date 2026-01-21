@@ -1,23 +1,25 @@
+.container {
+  max-width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
 .images {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-img {
-  width: 80%;
-  /* min-width: 1294px; */
-}
-@media (min-width: 21in) {
-  .container {
-    width: 21.3in;
-  }
-  img {
-    width: 80%;
-  }
+
+.images img {
+  width: 100%;
+  max-width: 1000px; /* ajusta este valor si quieres más o menos ancho máximo */
+  height: auto;
+  object-fit: contain;
 }
 
 h2 {
   color: #345A4D;
   font-family: "Montserrat", sans-serif !important;
+  text-align: center;
 }

@@ -14,10 +14,7 @@ import { Router } from '@angular/router';
 })
 export class InicioComponent {
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor() {}
 
-  logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
-  }
+
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { eraseSessionStorage, getSessionStorage, setSessionStorage } from '../../Api/OAuth';
 import { ENDPOINTS_API_PRIVATE, URL_LOGOUT, URL_REDIRECT } from '../../Api/ApiServiceCore';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../auth-service.service';
 
 
 interface AdmGral {
@@ -46,7 +47,7 @@ export class NavbarComponent implements OnInit {
 
   
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private  auth: AuthService) { }
 
   ngOnInit(): void {
     this.pasoLogin = getSessionStorage('loginSGE');
@@ -66,6 +67,13 @@ export class NavbarComponent implements OnInit {
   toggleSubmenu(menuOption: string) {
     this.selectedMenuOption = this.selectedMenuOption === menuOption ? '' : menuOption;
   }
+
+  selectMenu(option: string) {
+  this.selectedMenuOption = option;
+  this.navigateTo('/home');
+}
+
+
 
   redirectToLogout() {
     eraseSessionStorage('token');
@@ -145,5 +153,10 @@ export class NavbarComponent implements OnInit {
     setSessionStorage('loginSGE', '2');
     console.log('redirect token 2');
     window.location.href = `${ENDPOINTS_API_PRIVATE.identidad.token}?Code=${code}&State=${state}&Scope=${scope}`;
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

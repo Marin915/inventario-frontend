@@ -4,9 +4,9 @@
             <div class="nav-esp">
                 <div class="menu">
                     <li class="nav-item">
-                        <button class="btn" [class.selected]="selectedMenuOption === 'home'"
-                            (click)="navigateTo('home/home')">
-                            <img src="assets/home.png" alt="" class="logo-home"/>
+                        <button class="btn" [class.selected]="selectedMenuOption === 'homes'"
+                            (click)="navigateTo('/home')">
+                            <img src="assets/homes.png" alt="" class="logo-home"/>
                         </button>
                     </li>
                 </div>
@@ -53,13 +53,15 @@
                 
                 <div class="menu">
                     <li class="nav-item">
-                        <button class="sesion btn" [class.selected]="selectedMenuOption === 'login'"
-                            (click)="navigateTo('home/home')">
-                            <img src="assets/logaut.png" class="logo-home" />
-                        </button>
+                        <button class="sesion btn logout-btn" 
+        [class.selected]="selectedMenuOption === 'login'"
+        (click)="logout()">
+  <img src="assets/logaut.png" class="logo-home" alt="Cerrar sesión" />
+</button>
+
                     </li>
                 </div>
-                
+
             </div>
         </div>
     </ul>
