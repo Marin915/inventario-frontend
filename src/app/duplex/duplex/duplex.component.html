@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+<div class="casas-container">
+  <h2>Dúplex</h2>
+
+  <div class="cards">
+    <div class="card" *ngFor="let duplex of duplex; trackBy: trackById">
+      <h3>{{ duplex.nombre }}</h3>
+      <p>{{ duplex.ubicacion }}</p>
+
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="duplex.progreso"></div>
+      </div>
+
+      <small>Progreso {{ duplex.progreso }}%</small>
+
+      <button (click)="verMateriales(duplex)">
+        Ver materiales
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" *ngIf="duplexSeleccionado">
+  <div class="modal">
+
+    <h3>{{ duplexSeleccionado.nombre }}</h3>
+    <p class="subtitle">Entradas de materiales</p>
+
+    <ul class="material-list">
+      <li *ngFor="let m of materialesFiltrados">
+         {{ m.nombre }} — {{ m.cantidad }} {{ m.unidad }}
+      </li>
+    </ul>
+
+    <!-- BOTÓN AGREGAR ENTRADA -->
+    <button class="add-btn" (click)="mostrarFormulario = true">
+      Agregar entrada
+    </button>
+
+    <!-- FORMULARIO -->
+    <div *ngIf="mostrarFormulario" class="form">
+      <input
+        type="text"
+        placeholder="Material"
+        [(ngModel)]="nuevaEntrada.nombre">
+
+      <input
+        type="number"
+        placeholder="Cantidad"
+        [(ngModel)]="nuevaEntrada.cantidad">
+      <input
+        type="text"
+        placeholder="Unidad (bultos, pzas)"
+        [(ngModel)]="nuevaEntrada.unidad">
+      <button class="save" (click)="agregarEntrada()">
+        Guardar
+      </button>
+    </div>
+    <button class="close" (click)="cerrarDetalle()">Cerrar</button>
+  </div>
+</div>

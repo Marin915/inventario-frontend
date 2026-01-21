@@ -1,0 +1,196 @@
+/* ===============================
+   VARIABLES INSTITUCIONALES
+================================ */
+:root {
+  --nav-bg: #8B0000;          /* rojo institucional */
+  --nav-bg-dark: #5f0000;
+  --nav-text: #ffffff;
+  --nav-hover: rgba(255,255,255,0.15);
+  --submenu-bg: #ffffff;
+  --submenu-text: #1f2937;
+  --submenu-hover: #f3f4f6;
+  --accent: #345A4D;
+  --border: #e5e7eb;
+  --font: "Montserrat", sans-serif;
+}
+
+/* ===============================
+   NAVBAR BASE
+================================ */
+.navbar {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg, var(--nav-bg), var(--nav-bg-dark));
+  height: 56px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  font-family: var(--font);
+}
+
+/* ===============================
+   CONTENEDOR
+================================ */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0 30px;
+  gap: 10px;
+}
+
+.nav-esp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===============================
+   ITEMS
+================================ */
+.menu {
+  position: relative;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+/* ===============================
+   BOTONES
+================================ */
+.btn {
+  background: transparent;
+  border: none;
+  color: var(--nav-text);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .25s ease;
+  font-family: var(--font);
+}
+
+.btn:hover {
+  background: var(--nav-hover);
+}
+
+/* BOTÓN SELECCIONADO */
+.selected {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ===============================
+   ICONOS NAVBAR
+================================ */
+.logo-home {
+  width: 18px;
+  height: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  vertical-align: middle;
+  object-fit: contain;
+
+  /* Color blanco institucional */
+  filter: brightness(0) invert(1);
+  opacity: 1;
+
+  /* Suavidad visual */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* EFECTO PROFESIONAL AL PASAR EL CURSOR */
+.btn:hover .logo-home {
+  transform: scale(1.08);
+  opacity: 0.95;
+}
+
+/* ===============================
+   FORZAR ICONO HOME IGUAL A LOGOUT
+================================ */
+button:not(.sesion) .logo-home {
+  filter: brightness(0) invert(1) contrast(200%);
+}
+
+
+/* ===============================
+   SUBMENÚ
+================================ */
+.submenu {
+  position: absolute;
+  top: 115%;
+  left: 0;
+  min-width: 160px;
+  background: rgba(255, 255, 255, 0.95); /* fondo sólido casi opaco */
+  border-radius: 10px;
+  padding: 8px 0;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  border: 1px solid #ccc;
+  z-index: 5000; /* asegurar que esté encima */
+}
+
+/* ITEMS SUBMENU */
+.submenu li {
+  list-style: none;
+}
+
+/* BOTONES SUBMENU */
+.submenu .btn {
+  width: 100%;
+  text-align: left;
+  padding: 10px 16px;
+  color: var(--submenu-text);
+  font-size: 13px;
+  border-radius: 0;
+}
+
+.submenu .btn:hover {
+  background: var(--submenu-hover);
+  color: var(--accent);
+}
+
+/* ===============================
+   SESIÓN / LOGOUT
+================================ */
+.sesion {
+  background: rgba(0,0,0,0.15);
+}
+
+.sesion:hover {
+  background: rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .nav-esp {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: left;
+  }
+
+  .submenu {
+    position: static;
+    box-shadow: none;
+    border: none;
+  }
+}

@@ -1,0 +1,214 @@
+<app-navbar></app-navbar>
+<div class="contenedor-materiales">
+  <h2 class="titulo-3d">Inventario de Materiales</h2>
+  
+  <!-- BARRA BUSQUEDA -->
+  <div class="barra-busqueda">
+    <div class="busqueda-wrapper">
+      <input
+        type="text"
+        placeholder="Buscar materiales..."
+        [(ngModel)]="filtro"
+        (ngModelChange)="buscarMateriales(filtro)"/>
+    </div>
+  </div>
+  <!-- FORMULARIO -->
+  <form
+
+  
+  #formTop
+  #formMaterial="ngForm"
+  (ngSubmit)="guardar(formMaterial)"
+  class="formulario"
+  novalidate>
+    <div class="inputs-form">
+      <!-- CLAVE -->
+      <div class="form-group">
+        <label>Clave *</label>
+        <input type="text"name="clave"[(ngModel)]="material.clave" required/>
+      </div>
+      <!-- DESCRIPCIÓN -->
+      <div class="form-group">
+        <label>Descripción</label>
+        <input
+          type="text"
+          name="descripcion"
+          [(ngModel)]="material.descripcion"/>
+      </div>
+      <!-- PRECIO -->
+      <div class="form-group">
+        <label>Precio Unitario *</label>
+        <input
+          type="number" step="0.01" name="precioUnitario" [(ngModel)]="material.precioUnitario"/>
+      </div>
+      <!-- UNIDAD -->
+      <div class="form-group">
+        <label>Unidad</label>
+        <input type="text" name="unidadMedida" [(ngModel)]="material.unidadMedida"/>
+      </div>
+      <!-- MOVIMIENTO -->
+      <div class="form-group">
+        <label>Movimiento *</label>
+        <select
+          name="tipoMovimiento"
+          [(ngModel)]="movimiento.tipo"
+          [ngModelOptions]="{ standalone: editando }">
+          <option value="ENTRADA">ENTRADA</option>
+          <option value="SALIDA">SALIDA</option>
+        </select>
+      </div>
+      <!-- CANTIDAD MOVIMIENTO -->
+      <div class="form-group">
+        <label>Cantidad *</label>
+       <input type="number" min="1" [(ngModel)]="movimiento.cantidad" [ngModelOptions]="{ standalone: true }">
+      </div>
+      <!-- CANTIDAD ACTUAL -->
+      <div class="form-group">
+        <label>Cantidad actual</label>
+        <input type="number" [value]="cantidadOriginal" disabled/>
+      </div>
+      <!-- CATEGORIA -->
+      <div class="form-group">
+        <label>Categoría</label>
+        <input type="text" name="categoria" [(ngModel)]="material.categoria"/>
+      </div>
+    </div>
+
+    <!-- ACCIONES -->
+<div class="acciones-form acciones-grid">
+
+  <!-- DESHACER (IZQUIERDA) -->
+  <div class="acciones-izquierda" *ngIf="puedeDeshacer && !editando">
+    <button
+      type="button"
+      class="btn btn-undo"
+      (click)="deshacerMovimiento()">
+      ⮪ Deshacer
+    </button>
+  </div>
+
+  <!-- GUARDAR / CANCELAR (DERECHA) -->
+  <div class="acciones-derecha">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="formMaterial.invalid">
+      {{ editando ? 'Actualizar' : 'Guardar' }}
+    </button>
+
+    <button
+      *ngIf="editando"
+      type="button"
+      class="btn btn-secondary"
+      (click)="reset()">
+      Cancelar
+    </button>
+  </div>
+
+</div>
+
+
+  </form>
+
+
+  <!-- LOADING -->
+  <div *ngIf="cargando" class="loading">
+    Cargando materiales...
+  </div>
+  <!-- TABLA + PAGINACIÓN -->
+<div class="tabla-wrapper">
+  <table class="tabla-materiales">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Clave</th>
+        <th>Descripción</th>
+        <th>Unidad</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Entradas</th>
+        <th>Salidas</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let m of materialesFiltrados">
+        <td>{{ m.id }}</td>
+        <td>{{ m.clave }}</td>
+        <td>{{ m.descripcion }}</td>
+        <td>{{ m.unidadMedida }}</td>
+        <td>{{ m.cantidad }}</td>
+        <td>{{ m.precioUnitario }}</td>
+        <td>{{ m.entradas }}</td>
+        <td>{{ m.salidas }}</td>
+        <td>{{ m.categoria }}</td>
+        <td>
+          <button class="btn btn-edit" (click)="editar(m)">Editar</button>
+       <!---   <button class="btn btn-delete" (click)="eliminar(m.id)">Eliminar</button>-->
+        </td>
+      </tr>
+      <tr *ngIf="materialesFiltrados.length === 0 && !cargando">
+        <td colspan="10" style="text-align:center">
+          No hay materiales
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PAGINACIÓN -->
+<div class="paginacion-container" *ngIf="materialesFiltrados.length > 0">
+    <!-- INFO -->
+    <div class="paginacion-info">
+      Página {{ currentPage }} de {{ totalPages }}
+    </div>
+    <!-- CONTROLES -->
+    <div class="paginacion-controles">
+      <button class="btn-page" (click)="goToFirstPage()" [disabled]="currentPage === 1"> « </button>
+      <button class="btn-page" (click)="previousPage()" [disabled]="currentPage === 1"> ‹</button>
+       <span class="pagina-actual"> {{ currentPage }} </span> 
+       <button class="btn-page" (click)="nextPage()" [disabled]="currentPage === totalPages"> › </button>
+      <button class="btn-page" (click)="goToLastPage()" [disabled]="currentPage === totalPages"> » </button>
+    </div>
+    <!-- REGISTROS POR PÁGINA -->
+    <div class="paginacion-size">
+      <label>Registros</label>
+      <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+        <option *ngFor="let op of itemsPerPageOptions" [value]="op">
+          {{ op === -1 ? 'Todos' : op }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL ELIMINAR -->
+  <div class="modal-backdrop" *ngIf="modalEliminarVisible">
+    <div class="modal">
+      <h3>Confirmar eliminación</h3>
+      <p>¿Estás seguro que deseas eliminar este material?</p>
+      <div class="modal-buttons">
+        <button class="btn btn-danger" (click)="confirmarEliminar()">Eliminar</button>
+        <button class="btn btn-secondary" (click)="cancelarEliminar()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <!-- REPORTE -->
+  <button class="btn btn-success" (click)="descargarReporte()">
+    Descargar Reporte Excel
+  </button>
+
+ <!-- MODAL MENSAJE -->
+<div class="modal-backdrop" *ngIf="modalMensajeVisible">
+  <div class="modal modal-pequeno">
+    <p>{{ mensajeModal }}</p>
+    <button class="btn btn-primary" (click)="modalMensajeVisible = false">
+      OK
+    </button>
+  </div>
+</div>
+
+
+</div>
+

@@ -1,0 +1,183 @@
+<app-navbar></app-navbar>
+<div class="casas-container">
+
+  <!-- HEADER -->
+  <div class="header-lotes">
+    <h2>{{ titulo }}</h2>
+<button class="btn-primary btn-pequeno" (click)="mostrarFormularioCasa = true">
+  + Crear {{ titulo }}
+</button>
+</div>
+     <!-- button class="btn-primary btn-pequeno" (click)="mostrarFormularioCasa = true">
+      + Crear casa
+    </button> -->
+  <!-- CARDS -->
+  <div class="cards">
+    <div class="card" *ngFor="let casa of casas; trackBy: trackByCasa">
+      <h3>{{ casa.nombre }}</h3>
+      <p>{{ casa.ubicacion }}</p>
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="casa.progreso"></div>
+      </div>
+      <small>Progreso {{ casa.progreso }}%</small>
+      <button class="btn-secondary" (click)="verMateriales(casa)"> Ver materiales  </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CREAR CASA -->
+<div class="overlay" *ngIf="mostrarFormularioCasa">
+  <div class="modal modal-pequeno">
+    <h3>Nueva casa</h3>
+    <input type="text" placeholder="Nombre de la casa" [(ngModel)]="nombreCasa"/>
+    <input type="text" placeholder="Lote" [(ngModel)]="loteCasa" />
+    <div class="acciones">
+      <button class="btn-cancel" (click)="crearCasa()">Guardar</button>
+      <button class="btn-cancel" (click)="cancelarCasa()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETALLE CASA -->
+<div class="overlay" *ngIf="casaSeleccionada">
+  <div class="modal modal-grande">
+    <h3>{{ casaSeleccionada.nombre }}</h3>
+    <p class="subtitle">Control de materiales por casa</p>
+    <!-- BUSCADOR -->
+    <input type="text" class="input-busqueda" placeholder="Buscar material..." [(ngModel)]="filtro" (ngModelChange)="buscarMateriales(filtro)"/>
+
+    <!-- TABLA -->
+    <h4 class="seccion">Materiales asignados</h4>
+    <table class="tabla-materiales" *ngIf="materialesFiltrados.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Clave</th>
+          <th>Descripción</th>
+          <th>Unidad</th>
+          <th>Cantidad</th> <!-- Cantidad base a presupuestos -->
+          <th>Salidas</th>
+          <th>Por entregar</th>
+          <th>Entrega fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let m of materialesFiltrados">
+          <td>{{ m.id }}</td>
+          <td>{{ m.clave }}</td>
+          <td>{{ m.nombre }}</td>
+          <td>{{ m.unidad }}</td>
+          <td>{{ m.requerido }}</td>
+          <td>{{ m.usado }}</td>
+          <td [class.error-cantidad]="getPorEntregar(m) < 0" class="pendiente">{{ getPorEntregar(m) }}</td>
+          <td>{{ m.fechaEntrega | date: 'yyyy-MM-dd' }}</td>
+         <td>
+  <button (click)="registrarSalida(m)" class="btn-secondary" style="margin-right: 8px;"> Registrar salida</button>
+  <button *ngIf="getPorEntregar(m) > 0" class="btn-warning" (click)="devolverMaterial(m)"> Devolver sobrante</button>
+  </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- BOTÓN AGREGAR MATERIAL -->
+   <button class="add-btn" (click)="abrirFormularioMaterial()"> + Agregar material</button>
+   <!-- FORMULARIO AGREGAR MATERIAL -->
+<div *ngIf="mostrarFormulario" class="form">
+
+  <!-- SELECT DESDE INVENTARIO -->
+<select [(ngModel)]="materialSeleccionado">
+  <option *ngFor="let m of materialesInventario" [value]="m.id">
+    {{m.clave}} - {{m.descripcion}} (Stock: {{m.cantidad}})
+  </option>
+</select>
+
+
+
+
+  <!-- AUTOCOMPLETADOS (SOLO LECTURA) -->
+  <!--<input type="text" placeholder="Clave" [value]="nuevoMaterial.clave" disabled/>-->
+  <input type="text" placeholder="Descripción" [value]="nuevoMaterial.nombre" disabled />
+    <input type="text" placeholder="Unidad" [value]="nuevoMaterial.unidad" disabled />
+
+    <!-- SOLO CAPTURA -->
+    <input type="number"
+           placeholder="Cantidad presupuestada *"
+           [(ngModel)]="nuevoMaterial.requerido"
+           min="1" />
+
+    <input type="date" [(ngModel)]="nuevoMaterial.fechaEntrega" />
+
+    <div class="acciones">
+      <button class="save" (click)="agregarMaterial()">Guardar</button>
+      <button class="cancel" (click)="resetFormulario()">Cancelar</button>
+  </div>
+</div>
+<button class="close" (click)="cerrarDetalle()">Cerrar</button>
+<!-- MODAL PARA REGISTRAR SALIDA -->
+<div class="overlay" *ngIf="mostrarModalSalida">
+  <div class="modal modal-pequeno">
+    <h3>Registrar salida</h3>
+    <p>Ingresa la cantidad a registrar para el material: <strong>{{ materialParaSalida?.nombre }}</strong></p>
+    
+    <input type="number" min="1" [(ngModel)]="cantidadSalida" placeholder="Cantidad" />
+
+    <div class="acciones">
+      <button class="btn-primary btn-pequeno" (click)="confirmarSalida()">Registrar</button>
+      <button class="btn-cancel btn-pequeno" (click)="cancelarSalida()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal mensaje pequeño - siempre en el root del componente para que no quede oculto 
+<div class="modal-mensaje" *ngIf="mostrarModalMensaje">
+  {{ mensajeModal }}
+</div> -->
+
+<!-- Modal para pedir cantidad a devolver -->
+<div *ngIf="mostrarModalCantidad" class="modal-backdrop">
+  <div class="modal-content">
+    <h3>Devolver material</h3>
+    <p>Máximo a devolver: {{ sobranteParaDevolver }}</p>
+    <input
+      type="number"
+      [(ngModel)]="cantidadDevuelta"
+      min="1"
+      [max]="sobranteParaDevolver"
+      class="input-number"
+      aria-label="Cantidad a devolver"
+    />
+    <div class="modal-buttons">
+      <button class="btn-confirm" (click)="confirmarCantidadDevolucion()">Confirmar</button>
+      <button class="btn-cancel" (click)="cerrarModalCantidad()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para mostrar mensajes -->
+<div *ngIf="mostrarModalMensaje" class="modal-backdrop">
+  <div class="modal-content">
+    <p>{{ mensajeModal }}</p>
+    <button (click)="cerrarModalMensaje()">Cerrar</button>
+  </div>
+</div>
+<div class="overlay" *ngIf="mostrarModalSalida">
+  <div class="modal modal-pequeno">
+    <h3>Registrar salida</h3>
+
+    <p *ngIf="materialParaSalida">
+      Ingresa la cantidad a registrar para el material: <strong>{{ materialParaSalida.nombre }}</strong>
+    </p>
+
+    <input type="number" min="1" [(ngModel)]="cantidadSalida" placeholder="Cantidad"/>
+
+    <p class="mensaje-error" *ngIf="mensajeModal">{{ mensajeModal }}</p>
+
+    <div class="acciones">
+      <button class="btn-cancel btn-pequeno" (click)="confirmarSalida()">Registrar</button>
+      <button class="btn-cancel btn-pequeno" (click)="cancelarSalida()">Cancelar</button>
+    </div>
+  </div>
+</div>

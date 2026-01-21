@@ -1,0 +1,46 @@
+/* CONTENEDOR */
+.titulo-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  background: #ffffff;
+}
+
+.titulo-contenedor::after {
+  content: '';
+  width: 80px;
+  height: 3px;
+  background: #8B0000;
+  position: absolute;
+  top: 85px;
+  border-radius: 2px;
+}
+
+
+/* TÍTULO PROFESIONAL */
+.titulo-3d-rotante {
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #8B0000; /* rojo vino institucional */
+  text-transform: uppercase;
+
+  /* sombra elegante (no exagerada) */
+  text-shadow:
+    1px 1px 0 #5f0000,
+    2px 2px 4px rgba(0,0,0,0.25);
+
+  animation: balanceo 6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* ANIMACIÓN SUTIL */
+@keyframes balanceo {
+  0%   { transform: rotateY(0deg); }
+  25%  { transform: rotateY(4deg); }
+  50%  { transform: rotateY(0deg); }
+  75%  { transform: rotateY(-4deg); }
+  100% { transform: rotateY(0deg); }
+}
+

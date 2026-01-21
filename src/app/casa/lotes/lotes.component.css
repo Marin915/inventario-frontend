@@ -1,0 +1,763 @@
+:root {
+  --primary: #1f3a5f;
+  --primary-dark: #162b46;
+  --secondary: #4f6d7a;
+  --accent: #e67e22;
+
+  --success: #27ae60;
+  --danger: #c0392b;
+  --warning: #f39c12;
+
+  --bg-main: #f4f6f9;
+  --bg-card: #ffffff;
+  --bg-table-header: #2c3e50;
+
+  --text-main: #2c3e50;
+  --text-muted: #7f8c8d;
+
+  --border-color: #dcdfe3;
+  --radius: 10px;
+  --shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+body {
+  background: var(--bg-main);
+}
+
+.casas-container {
+  padding: 30px;
+}
+
+.casas-container h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 25px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), #2ecc71);
+  transition: width 0.4s ease;
+}
+
+.card small {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.card button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: rgb(8, 7, 7);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.card button:hover {
+  background: var(--primary-dark);
+}
+
+
+.modal {
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 1100px;
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal h3 {
+  font-size: 22px;
+  color: var(--primary);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 15px;
+  
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.tabla-materiales {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.tabla-materiales thead {
+  background: var(--bg-table-header);
+}
+
+.tabla-materiales th {
+  color: white;
+  padding: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.tabla-materiales td {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.tabla-materiales tbody tr:hover {
+  background: #f1f5f9;
+}
+
+.pendiente {
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.entregado {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.add-btn {
+  background: var(--accent);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  opacity: 0.9;
+}
+
+.close {
+  margin-top: 15px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.form {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.form input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 14px;
+}
+
+.form button.save {
+  background: var(--success);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.form button.cancel {
+  background: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+
+
+.casas-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header-lotes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-lotes h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-cancel {
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+/* crea casa*/
+/* Fondo semi-transparente para el overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;   /* 👈 importante */
+  
+  padding: 40px 16px;        /* espacio para scroll */
+  overflow-y: auto;          /* 👈 EL SCROLL VA AQUÍ */
+  
+  z-index: 1000;
+}
+
+
+/* Contenedor modal pequeño */
+/* Contenedor modal pequeño */
+.modal-pequeno {
+  background-color: #f8f8f8;
+  padding: 25px 30px;       /* Más padding para dar espacio */
+  border-radius: 10px;
+  width: 320px;
+  max-height: 90vh;          /* límite vertical para que no sobrepase pantalla */
+  overflow-y: auto;          /* scroll si el contenido es muy alto */
+  box-shadow: 0 8px 24px rgba(240, 237, 237, 0.747);
+  display: flex;
+  flex-direction: column;    /* para ordenar hijos verticalmente */
+  gap: 15px;                 /* separación entre elementos */
+}
+
+/* Título del modal */
+.modal-pequeno h3 {
+  margin: 0 0 10px 0;        /* separa un poco del resto */
+  font-size: 1.4rem;
+  color: #c90e0e;
+  text-align: center;
+}
+
+/* Inputs y select estilizados */
+.modal-pequeno input[type="text"],
+.modal-pequeno select,
+.modal-pequeno input[type="number"],
+.modal-pequeno input[type="date"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #1f0b0b;
+  border-radius: 5px;
+  outline-color: #2a72d9;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.modal-pequeno input[type="text"]:focus,
+.modal-pequeno select:focus,
+.modal-pequeno input[type="number"]:focus,
+.modal-pequeno input[type="date"]:focus {
+  border-color: #2a72d9;
+}
+
+/* Contenedor para botones */
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Estilo para botones dentro de .acciones */
+.acciones button {
+  flex: 1;                  /* que todos los botones ocupen igual espacio */
+  padding: 10px 0;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Botón guardar - estilo btn-primary */
+.acciones button.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.acciones button.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Botón cancelar - estilo btn-cancel */
+.acciones button.btn-cancel {
+  background: #fff;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  box-sizing: border-box;
+}
+
+.acciones button.btn-cancel:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary-dark);
+}
+
+.btn-primary.btn-pequeno {
+  background-color: var(--accent);   /* fondo naranja */
+  color: #000000;                    /* texto negro */
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(230, 126, 34, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary.btn-pequeno:hover,
+.btn-primary.btn-pequeno:focus {
+  background-color: #d76a00; /* tono más oscuro */
+  box-shadow: 0 6px 12px rgba(215, 106, 0, 0.8);
+  outline: none;
+  color: #000000; /* texto negro también en hover/focus */
+}
+
+.ng-select-container {
+  background: #fff;
+  border: 1.5px solid #dcdfe3;
+  border-radius: 8px;
+}
+
+.ng-dropdown-panel {
+  background: #fff;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Forzar dropdown hacia arriba */
+.abrir-arriba .ng-dropdown-panel {
+  top: auto !important;
+  bottom: 100% !important;
+  margin-bottom: 6px;
+}
+.ng-dropdown-panel {
+  background: #ffffff;
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  z-index: 3000 !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 260px;
+  overflow-y: auto;
+}
+.form {
+  overflow: visible;
+}
+
+
+/* Botón pequeño con estilo btn-primary */
+.btn-pequeno {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  width: auto;  /* Que no tome todo el ancho */
+  flex: none;   /* Para que no se expanda en flex container */
+}
+
+/* MODAL DE CREAR CASA*/
+.modal-mensaje {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2a72d9;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  font-weight: 600;
+  font-size: 1rem;
+  z-index: 2000; /* más alto que otros modales */
+  opacity: 0.95;
+  user-select: none;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+.modal-mensaje {
+  border: 2px solid yellow; /* para que se vea el borde */
+}
+
+
+.error-cantidad {
+  color: red;
+  font-weight: bold;
+}
+
+.modal-backdrop {
+  position: fixed;          /* Fijo sobre toda la pantalla */
+  top: 0; left: 0;          /* En la esquina */
+  width: 100vw;             /* Toda la pantalla horizontal */
+  height: 100vh;            /* Toda la pantalla vertical */
+  background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+  display: flex;            /* Flex para centrar */
+  justify-content: center;  /* Centrado horizontal */
+  align-items: center;      /* Centrado vertical */
+  z-index: 1500;            /* Que quede sobre todo */
+  padding: 15px;            /* Padding para evitar que el modal toque bordes en pantallas chicas */
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 8px;
+  max-width: 420px;      /* No más ancho que esto */
+  width: 100%;           /* Que ocupe el 100% hasta max-width */
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;             /* Espacio vertical interno */
+}
+
+/* buscador */
+
+/* Inputs y selects */
+.input-busqueda,
+.form input,
+.form ng-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border-color);
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color var(--transition);
+  background-color: #fff;
+  color: var(--text-main);
+}
+
+button.close {
+  margin-top: 20px;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(31, 58, 95, 0.2);
+  user-select: none;
+}
+
+button.close:hover {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(31, 58, 95, 0.35);
+  border-color: var(--primary-dark);
+}
+
+
+/* Botón secundario (btn-secondary) */
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: var(--primary);
+  color: #aa8c8c;
+  border-color: var(--primary-dark);
+  box-shadow: 0 4px 14px rgba(31, 58, 95, 0.35);
+  outline: none;
+}
+
+/* Botón advertencia (btn-warning) */
+.btn-warning {
+  background: var(--warning);
+  color: #8cac83;
+  border: 2px solid var(--warning);
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+  user-select: none;
+  display: inline-block;
+  min-width: 140px;
+  text-align: center;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+  background: #c6e4c0; /* Un tono más oscuro del warning */
+  border-color: #b55a07;
+  box-shadow: 0 4px 14px rgba(181, 90, 7, 0.45);
+  outline: none;
+}
+
+
+
+
+
+
+
+
+/* Contenedor principal del ng-select */
+.inventario-select.ng-select {
+  background-color: #fff !important;
+  border: 1.5px solid #dcdfe3 !important;
+  border-radius: 8px !important;
+  color: #2c3e50 !important; /* texto principal */
+  box-shadow: none !important;
+}
+
+/* Dropdown panel (lista desplegable) */
+.inventario-select.ng-select .ng-dropdown-panel {
+  background: #fff !important;
+  border: 1px solid #dcdfe3 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18) !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  color: #2c3e50 !important;
+  z-index: 3000 !important;
+}
+
+/* Forzar dropdown hacia arriba si tiene clase abrir-arriba */
+.inventario-select.abrir-arriba.ng-select .ng-dropdown-panel {
+  top: auto !important;
+  bottom: 100% !important;
+  margin-bottom: 6px !important;
+}
+
+/* Opciones dentro del dropdown */
+.inventario-select.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 8px 12px !important;
+  color: #2c3e50 !important;
+  background: transparent !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  border-radius: 6px !important;
+}
+
+/* Resaltar opción al pasar el mouse */
+.inventario-select.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover,
+.inventario-select.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}
+
+/* Estilo especial para el badge de stock */
+.inventario-select.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option .stock-badge {
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+/* Opcional: cuando la opción está seleccionada */
+.inventario-select.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  background-color: var(--primary-dark) !important;
+  color: #fff !important;
+}
+
+/* Fondo modal: semi-transparente y centrado */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  padding: 15px; /* espacio para móviles */
+  box-sizing: border-box;
+}
+
+/* Contenedor modal */
+.modal-content {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Input number estilizado */
+.input-number {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #ccc;
+  outline-color: #1f3a5f; /* color al enfocar */
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.input-number:focus {
+  border-color: #1f3a5f;
+}
+
+/* Contenedor de botones */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Botón confirmar */
+.btn-confirm {
+  background-color: #1f3a5f; /* color primario */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 120px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-confirm:hover,
+.btn-confirm:focus {
+  background-color: #162b46; /* más oscuro */
+  outline: none;
+}
+
+/* Botón cancelar */
+.btn-cancel {
+  background-color: #fff;
+  color: #1f3a5f;
+  border: 2px solid #1f3a5f;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 120px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-cancel:hover,
+.btn-cancel:focus {
+  background-color: #1f3a5f;
+  color: white;
+  outline: none;
+}

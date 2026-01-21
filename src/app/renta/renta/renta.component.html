@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<div class="casas-container">
+  <h2>Rentas</h2>
+
+  <div class="cards">
+    <div class="card" *ngFor="let renta of rentas; trackBy: trackById">
+      <h3>{{ renta.nombre }}</h3>
+      <p>{{ renta.ubicacion }}</p>
+
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="renta.progreso"></div>
+      </div>
+
+      <small>Progreso {{ renta.progreso }}%</small>
+
+      <button (click)="verMateriales(renta)">
+        Ver materiales
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" *ngIf="rentaSeleccionada">
+  <div class="modal">
+
+    <h3>{{ rentaSeleccionada.nombre }}</h3>
+    <p class="subtitle">Entradas de materiales</p>
+
+    <ul class="material-list">
+      <li *ngFor="let m of materialesFiltrados">
+        🧱 {{ m.nombre }} — {{ m.cantidad }} {{ m.unidad }}
+      </li>
+    </ul>
+
+    <!-- BOTÓN AGREGAR ENTRADA -->
+    <button class="add-btn" (click)="mostrarFormulario = true">
+      Agregar entrada
+    </button>
+
+    <!-- FORMULARIO -->
+    <div *ngIf="mostrarFormulario" class="form">
+      <input
+        type="text"
+        placeholder="Material"
+        [(ngModel)]="nuevaEntrada.nombre">
+
+      <input
+        type="number"
+        placeholder="Cantidad"
+        [(ngModel)]="nuevaEntrada.cantidad">
+
+      <input
+        type="text"
+        placeholder="Unidad (bultos, pzas)"
+        [(ngModel)]="nuevaEntrada.unidad">
+
+      <button class="save" (click)="agregarEntrada()">
+        Guardar
+      </button>
+    </div>
+
+    <button class="close" (click)="cerrarDetalle()">Cerrar</button>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<nav class="navbar">
+    <ul class="navbar-nav">
+        <div class="nav-buttons">
+            <div class="nav-esp">
+                <div class="menu">
+                    <li class="nav-item">
+                        <button class="btn" [class.selected]="selectedMenuOption === 'home'"
+                            (click)="navigateTo('home/home')">
+                            <img src="assets/home.png" alt="" class="logo-home"/>
+                        </button>
+                    </li>
+                </div>
+                <div class="menu">
+                    <li class="nav-item">
+                        <button class="btn" [class.selected]="selectedMenuOption === 'cartaInvitacion'"
+                            (click)="navigateTo('home/materiales')">
+                        Materiales 
+                        </button>  
+                    </li>
+                </div>
+                <div class="menu">
+                    <li class="nav-item">
+                        <!-- Botón principal -->
+                        <button 
+                            class="btn" 
+                            [class.selected]="selectedMenuOption === 'cargaInformacion'" 
+                            (click)="toggleSubmenu('cargaInformacion')">
+                            Construccion Casas
+                        </button> 
+                        <!-- Submenú desplegable -->
+                        <ul class="submenu" *ngIf="selectedMenuOption === 'cargaInformacion'">
+                            <li>
+                                <button class="btn" (click)="navigateTo('home/casa')">
+                                    Lotes
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn" (click)="navigateTo('home/duplex')">
+                                    Duplex
+                                </button>
+                            </li>
+                            <li>
+                                <button class="btn" (click)="navigateTo('home/renta')">
+                                    Renta
+                                </button>
+                            </li>
+                            <li>
+                        </ul>
+                    </li>
+                </div>
+                        
+              
+                
+                <div class="menu">
+                    <li class="nav-item">
+                        <button class="sesion btn" [class.selected]="selectedMenuOption === 'login'"
+                            (click)="navigateTo('home/home')">
+                            <img src="assets/logaut.png" class="logo-home" />
+                        </button>
+                    </li>
+                </div>
+                
+            </div>
+        </div>
+    </ul>
+</nav>
+<br>
+  

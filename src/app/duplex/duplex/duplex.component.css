@@ -1,0 +1,140 @@
+.casas-container {
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin: 0;
+  color: #345A4D;
+}
+
+.progress {
+  background: #eee;
+  border-radius: 10px;
+  height: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #4CAF50;
+}
+
+.card button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #345A4D;
+  color: white;
+  cursor: pointer;
+}
+
+/* MODAL */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+}
+
+.modal ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.close {
+  margin-top: 15px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: #999;
+  color: white;
+  border-radius: 8px;
+}
+
+.add-btn {
+  margin-top: 10px;
+  width: 100%;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.form input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px;
+}
+
+.save {
+  margin-top: 8px;
+  width: 100%;
+  background: #345A4D;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+}
+/* Buscador */
+
+.barra-busqueda {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.busqueda-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.busqueda-wrapper input {
+  padding: 8px 30px 8px 10px; /* espacio para el ícono a la derecha */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 250px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.icon-buscar {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none; /* no bloquea escribir */
+}
