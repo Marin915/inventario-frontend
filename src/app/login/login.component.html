@@ -1,1 +1,6 @@
-<p>login works!</p>
+<form (submit)="login(); $event.preventDefault()">
+  <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required />
+  <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
+  <button type="submit">Entrar</button>
+  <p *ngIf="error" style="color:red;">Usuario o contraseña incorrectos</p>
+</form>
