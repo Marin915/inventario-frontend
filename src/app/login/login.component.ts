@@ -5,10 +5,10 @@ import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-login',
   imports: [FormsModule],
-  templateUrl: './login.component.html',
   styleUrl: './login.component.css',
    template: `
   <form (submit)="login()">

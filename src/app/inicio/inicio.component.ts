@@ -12,19 +12,12 @@ import { Router } from '@angular/router';
     <button (click)="logout()">Cerrar sesión</button>
   `
 })
-export class LoginComponent {
-  username = '';
-  password = '';
-  error = false;
+export class InicioComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  login() {
-    this.error = false;
-    if (this.auth.login(this.username, this.password)) {
-      this.router.navigate(['/inicio']);
-    } else {
-      this.error = true;
-    }
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }
