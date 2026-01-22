@@ -14,19 +14,23 @@ import { AuthGuard } from './auth-guard.service';
 
 export const routes: Routes = [
 
-   { path: 'login', component: LoginComponent},
-  
-  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
+   // LOGIN (PÚBLICO)
+  { path: 'login', component: LoginComponent },
+
+  // RUTA INICIAL → LOGIN
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
 
   // Aquí otras rutas protegidas
+   { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home/casa', component: LotesComponent, data: { modeloId: 3, titulo: 'Lotes' }, canActivate: [AuthGuard] },
   { path: 'home/duplex', component: LotesComponent, data: { modeloId: 4, titulo: 'Dúplex' }, canActivate: [AuthGuard] },
   { path: 'home/renta', component: LotesComponent, data: { modeloId: 5, titulo: 'Renta' }, canActivate: [AuthGuard] },
   { path: 'home/materiales', component: MaterialesComponent, canActivate: [AuthGuard] },
 
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: '**', redirectTo: 'inicio' }
+  // CUALQUIER RUTA INVÁLIDA → LOGIN
+  { path: '**', redirectTo: 'login' }
 
 /*  { path: '', redirectTo: 'home', pathMatch: 'full' }, // HOME por defecto
   { path: 'home', component: HomeComponent },
